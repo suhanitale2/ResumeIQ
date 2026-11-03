@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8081'
 function cleanInterviewText(text) {
   if (!text) return ''
 
@@ -74,7 +74,7 @@ useEffect(() => {
 
     try {
       const response = await fetch(
-        'http://localhost:8081/api/resume/history',
+        `${API_BASE_URL}/api/resume/history`,
         {
           method: 'GET',
           credentials: 'include',
@@ -125,7 +125,7 @@ useEffect(() => {
 
     try {
       const response = await fetch(
-        'http://localhost:8081/api/resume/ai-review/history',
+        `${API_BASE_URL}/api/resume/ai-review/history`,
         {
           method: 'GET',
           credentials: 'include',
@@ -172,7 +172,7 @@ useEffect(() => {
 
     try {
       const response = await fetch(
-        'http://localhost:8081/api/resume/recent',
+        `${API_BASE_URL}/api/resume/recent`,
         {
           method: 'GET',
           credentials: 'include',
@@ -213,7 +213,7 @@ useEffect(() => {
 
     try {
       const response = await fetch(
-        'http://localhost:8081/api/resume/recent',
+        '${API_BASE_URL}/api/resume/recent',
         {
           method: 'GET',
           credentials: 'include',
@@ -287,7 +287,7 @@ useEffect(() => {
     formData.append('jobDescription', jobDescription)
 
     const response = await fetch(
-      'http://localhost:8081/api/resume/upload',
+      `${API_BASE_URL}/api/resume/upload`,
       {
         method: 'POST',
         credentials: 'include',
@@ -334,7 +334,7 @@ const handleAIReview = async () => {
     formData.append('file', aiReviewFile)
 
     const response = await fetch(
-      'http://localhost:8081/api/resume/ai-review',
+      `${API_BASE_URL}/api/resume/ai-review`,
       {
         method: 'POST',
         credentials: 'include',
@@ -406,7 +406,7 @@ const handleCareerCoach = async () => {
     formData.append('focusArea', coachFocus)
 
     const response = await fetch(
-      'http://localhost:8081/api/resume/career-coach',
+      '${API_BASE_URL}/api/resume/career-coach',
       {
         method: 'POST',
         credentials: 'include',
@@ -440,7 +440,7 @@ const loadCareerCoachHistory = async () => {
 
   try {
     const response = await fetch(
-      'http://localhost:8081/api/resume/career-coach/history',
+      '${API_BASE_URL}/api/resume/career-coach/history',
       {
         method: 'GET',
         credentials: 'include',
@@ -480,7 +480,7 @@ const loadProfile = async () => {
 
   try {
     const response = await fetch(
-      'http://localhost:8081/api/auth/session',
+      '${API_BASE_URL}/api/auth/session',
       {
         method: 'GET',
         credentials: 'include',
@@ -514,7 +514,7 @@ const loadProfile = async () => {
 const logoutUser = async () => {
   try {
     const response = await fetch(
-      'http://localhost:8081/api/auth/logout',
+      '${API_BASE_URL}/api/auth/logout',
       {
         method: 'POST',
         credentials: 'include',
@@ -541,7 +541,7 @@ const logoutUser = async () => {
 const checkAuthSession = async () => {
   try {
     const response = await fetch(
-      'http://localhost:8081/api/auth/session',
+      '${API_BASE_URL}/api/auth/session',
       {
         method: 'GET',
         credentials: 'include',
@@ -581,7 +581,7 @@ const latestResumeScore =
 const handleDownloadRecentResume = async (id, fileName) => {
   try {
     const response = await fetch(
-      `http://localhost:8081/api/resume/recent/${id}/download`,
+      `	${API_BASE_URL}/api/resume/recent/${id}/download`,
       {
         method: 'GET',
         credentials: 'include',
@@ -612,7 +612,7 @@ const handleDownloadRecentResume = async (id, fileName) => {
 const loadInterviewHistory = async () => {
   try {
     const response = await fetch(
-      'http://localhost:8081/api/interview/history',
+      '${API_BASE_URL}/api/interview/history',
       {
         method: 'GET',
         credentials: 'include',
@@ -652,7 +652,7 @@ const generateInterviewQuestion = async () => {
     )
 
     const response = await fetch(
-      'http://localhost:8081/api/interview/question',
+      '${API_BASE_URL}/api/interview/question',
       {
         method: 'POST',
         credentials: 'include',
@@ -699,7 +699,7 @@ const submitInterviewAnswer = async () => {
     formData.append('targetRole', interviewTargetRole.trim())
 
     const response = await fetch(
-      'http://localhost:8081/api/interview/evaluate',
+      '${API_BASE_URL}/api/interview/evaluate',
       {
         method: 'POST',
         credentials: 'include',
@@ -937,7 +937,7 @@ onChange={(event) => setJobDescription(event.target.value)}
                 onClick={async () => {
                   try {
                     const response = await fetch(
-                      `http://localhost:8081/api/resume/recent/${item.id}/download`,
+                      `${API_BASE_URL}/api/resume/recent/${item.id}/download`,
                       { credentials: 'include' }
                     )
 
@@ -975,7 +975,7 @@ onChange={(event) => setJobDescription(event.target.value)}
 
                   try {
                     const response = await fetch(
-                      `http://localhost:8081/api/resume/recent/${item.id}`,
+                      `${API_BASE_URL}/api/resume/recent/${item.id}`,
                       {
                         method: 'DELETE',
                         credentials: 'include',
@@ -1987,7 +1987,7 @@ case 'AI Interview Coach':
       className="secondary-button"
       style={{ width: '100%', marginBottom: '14px' }}
       onClick={() => {
-        window.location.href = 'http://localhost:8081/login.html'
+        window.location.href = `${API_BASE_URL}/login.html`
       }}
     >
       Login to ResumeIQ
